@@ -1,6 +1,6 @@
 {
-  "name": "react-native-html-to-markdown",
-  "version": "1.0.0",
+  "name": "@vimeiro-co/react-native-html-to-markdown",
+  "version": "1.0.1",
   "description": "html to markdown converter compatible with react-native",
   "main": "index.js",
   "directories": {
@@ -15,16 +15,16 @@
     "html converter",
     "react-native"
   ],
-  "author": "zeevl",
+  "author": "Vimeiro Co",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zeevl/react-native-html-to-markdown.git"
+    "url": "git+https://github.com/vimeiro-co/react-native-html-to-markdown.git"
   },
   "bugs": {
-    "url": "https://github.com/zeevl/react-native-html-to-markdown/issues"
+    "url": "https://github.com/vimeiro-co/react-native-html-to-markdown/issues"
   },
-  "homepage": "https://github.com/zeevl/react-native-html-to-markdown#readme",
+  "homepage": "https://github.com/vimeiro-co/react-native-html-to-markdown#readme",
   "devDependencies": {
     "jest": "^24.5.0"
   }
