@@ -12,10 +12,11 @@ var ulRegex = /<ul>([\s\S]*?)<\/ul>/gim
 var olRegex = /<ol>([\s\S]*?)<\/ol>/gim
 var liRegex = /<li>([\s\S]*?)<\/li>/gim
 var preRegex = /<pre>([\s\S]*?)<\/pre>/gim
+var codeRegex = /<code>([\s\S]*?)<\/code>/gim
 var blockQuoteRegex = /<blockquote>([\s\S]*?)<\/blockquote>/gim
 var boldRegex = /<(?:b|strong)>([\s\S]*?)<\/\w*>/gim
 var italicRegex = /<(?:i|em)>([\s\S]*?)<\/\w*>/gim
-var hrefRegex = /<a href=['|"](.+)['|"]>(.+)<\/a>/gim
+var hrefRegex = /<a href=['|"](.+)['|"]>(.+?)<\/a>/gim
 var brRegex = /<br \/>/gim
 
 /**
@@ -56,7 +57,7 @@ function makeRegex (regex, doc, before, after, replaceFn) {
  */
 function replaceHeading (doc) {
   return makeRegex(headingRegex, doc, null, null, function (match) {
-    return addHashes(match[1]) + match[2]
+    return addHashes(match[1]) + ' ' + match[2]
   });
 }
 
@@ -106,6 +107,18 @@ function replaceParagraph (doc) {
  */
 function replacePre (doc) {
   return makeRegex(preRegex, doc, '`', '`');
+}
+
+
+/**
+ * @description replaces code section with equalent markdown
+ * syntax
+ * @method replaceCode
+ * @param  {String}       doc [description]
+ * @return {String}           [description]
+ */
+function replaceCode (doc) {
+  return makeRegex(codeRegex, doc, '```', '```');
 }
 
 /**
@@ -169,10 +182,10 @@ function replaceLi (doc, tag) {
       if (tag !== 'ul') {
         replaceIndex++;
         replaceTag = replaceIndex + '. ';
-      }else{
+      } else {
         replaceTag = '* ';
       }
-      newDoc = newDoc.replace(matches[0],replaceTag+matches[1].trim());
+      newDoc = newDoc.replace(matches[0], replaceTag + matches[1].trim() + '\n');
     }
   }
   return newDoc
@@ -194,4 +207,4 @@ function addHashes (count) {
 }
 
 
-module.exports = [replaceHeading,replaceParagraph,replacePre,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote,replaceHref, replaceBr]
+module.exports = [replaceHeading,replaceParagraph,replacePre,replaceCode,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote,replaceHref, replaceBr]
